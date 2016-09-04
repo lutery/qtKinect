@@ -1,0 +1,20 @@
+ 驱动器 F 中的卷是 本地磁盘
+ 卷的序列号是 421D-4B7C
+
+ F:\qtsln\HelloKinect\Kinect\inc 的目录
+
+2016/09/03  09:23    <DIR>          .
+2016/09/03  09:23    <DIR>          ..
+2016/09/03  09:23                 0 Header.txt
+2014/10/19  13:16           110,050 Kinect.Face.h
+2014/10/19  12:54           364,880 Kinect.h
+2014/10/19  12:54             8,488 Kinect.INPC.h
+2014/10/19  13:17            48,595 Kinect.VisualGestureBuilder.h
+2014/10/19  12:43             1,505 NuiKinectFusionApi.h
+2014/10/19  12:58             3,094 NuiKinectFusionBase.h
+2014/10/19  14:02            17,491 NuiKinectFusionCameraPoseFinder.h
+2014/10/19  14:02            31,501 NuiKinectFusionColorVolume.h
+2014/10/19  12:43            24,784 NuiKinectFusionDepthProcessor.h
+2014/10/19  14:02            31,204 NuiKinectFusionVolume.h
+              11 个文件        641,592 字节
+               2 个目录 134,775,734,272 可用字节
