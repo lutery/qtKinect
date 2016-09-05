@@ -7,8 +7,10 @@
 //#include <Kinect.h>
 #include "stdinc.h"
 
-class KinectObj;
-class KinectThread;
+//class KinectObj;
+//class KinectThread;
+class KinectWidget;
+class QPushButton;
 
 namespace Ui {
 class Dialog;
@@ -23,26 +25,21 @@ public:
     ~Dialog();
 
 private slots:
-    void updateUI();
+//    void updateUI();
 
 private:
     Ui::Dialog *ui;
-    KinectObj* pKinectObj = nullptr;
-    KinectThread* pKinectThread = nullptr;
-//    const int IMAGE_WIDTH = 1920;
-//    const int IMAGE_HEIGHT = 1080;
-//    IKinectSensor* mpKinect;
-//    IColorFrameReader* mpColorFrameReader;
-//    WAITABLE_HANDLE mhColorFrameArrived;
-//    RGBQUAD* mpColorRGBX;
-//    unsigned int nBufferSize;
+//    KinectObj* pKinectObj = nullptr;
+//    KinectThread* pKinectThread = nullptr;
+    KinectWidget* pKinectWidget = nullptr;
+    QPushButton* pOpenPB = nullptr;
+    QPushButton* pClosePB = nullptr;
 
 private:
-//    HRESULT initKinect();
-//    void checkColorFrame();
+    void initView();
 
 protected:
-    void paintEvent(QPaintEvent* event) override;
+//    void paintEvent(QPaintEvent* event) override;
 };
 
 #endif // DIALOG_H

@@ -16,7 +16,8 @@ CONFIG += C++11
 SOURCES += main.cpp\
         dialog.cpp \
     kinectthread.cpp \
-    kinectobj.cpp
+    kinectobj.cpp \
+    kinectwidget.cpp
 
 HEADERS  += dialog.h \
     stdinc.h \
@@ -31,7 +32,8 @@ HEADERS  += dialog.h \
     NuiKinectFusionDepthProcessor.h \
     NuiKinectFusionVolume.h \
     kinectthread.h \
-    kinectobj.h
+    kinectobj.h \
+    kinectwidget.h
 
 
 FORMS    += dialog.ui
