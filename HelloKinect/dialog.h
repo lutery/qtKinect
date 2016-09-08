@@ -26,6 +26,9 @@ public:
 
 private slots:
 //    void updateUI();
+    void openKinect();
+    void closeKinect();
+    void switchTime();
 
 private:
     Ui::Dialog *ui;
@@ -34,9 +37,11 @@ private:
     KinectWidget* pKinectWidget = nullptr;
     QPushButton* pOpenPB = nullptr;
     QPushButton* pClosePB = nullptr;
+    QPushButton* pShowTimePB = nullptr;
 
 private:
     void initView();
+    void initEvent();
 
 protected:
 //    void paintEvent(QPaintEvent* event) override;

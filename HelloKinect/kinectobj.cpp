@@ -189,10 +189,13 @@ void KinectObj::addQImage(QImage *image)
 {
     pMutex->lock();
     mBufferImage.append(std::shared_ptr<QImage>(image));
-    if (mBufferImage.count() > 60)
+    //这里有一个未解之谜，如果仅仅只是绘制在主DIALOG主对话框中得化
+    //那么即使这里填写60，也不会有延时
+    if (mBufferImage.count() > 5)
     {
         mBufferImage.pop_front();
     }
+    qDebug() << "BufferImage Size is " << mBufferImage.size();
     pMutex->unlock();
 }
 

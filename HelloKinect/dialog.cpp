@@ -28,6 +28,7 @@ Dialog::Dialog(QWidget *parent) :
 
 //    pKinectThread->start();
     this->initView();
+    this->initEvent();
 }
 
 Dialog::~Dialog()
@@ -57,8 +58,10 @@ void Dialog::initView()
     QVBoxLayout* leftBarLayout = new QVBoxLayout(this);
     pOpenPB = new QPushButton(tr("打开Kinect"), this);
     pClosePB = new QPushButton(tr("关闭Kinect"), this);
+    pShowTimePB = new QPushButton(tr("关闭时间"), this);
 
     leftBarLayout->addWidget(pOpenPB);
+    leftBarLayout->addWidget(pShowTimePB);
     leftBarLayout->addWidget(pClosePB);
     leftBarLayout->addStretch(1);
 
@@ -67,6 +70,37 @@ void Dialog::initView()
     mainLayout->addWidget(pKinectWidget, 1);
 
     this->setLayout(mainLayout);
+}
+
+void Dialog::initEvent()
+{
+    connect(pOpenPB, SIGNAL(clicked(bool)), this, SLOT(openKinect()));
+    connect(pClosePB, SIGNAL(clicked(bool)), this, SLOT(closeKinect()));
+    connect(pShowTimePB, SIGNAL(clicked(bool)), this, SLOT(switchTime()));
+}
+
+void Dialog::openKinect()
+{
+    pKinectWidget->openKinect();
+}
+
+void Dialog::closeKinect()
+{
+    pKinectWidget->closeKinect();
+}
+
+void Dialog::switchTime()
+{
+    pKinectWidget->mbShowTime = !(pKinectWidget->mbShowTime);
+
+    if (pKinectWidget->mbShowTime)
+    {
+        pShowTimePB->setText(tr("关闭时间"));
+    }
+    else
+    {
+        pShowTimePB->setText(tr("打开时间"));
+    }
 }
 
 //void Dialog::updateUI()

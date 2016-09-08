@@ -6,6 +6,10 @@
 
 class KinectObj;
 class KinectThread;
+class QTime;
+class QPainter;
+class QPoint;
+class QRect;
 
 class KinectWidget : public QWidget
 {
@@ -19,12 +23,22 @@ signals:
 public slots:
     void updateUI();
 
+public:
+    bool mbShowTime = true;
+
 private:
     KinectObj* pKinectObj = nullptr;
     KinectThread* pKinectThread = nullptr;
+    QTime* mpTime = nullptr;
+    QRect* mpDrawTimeRC = nullptr;
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void paintTime(QPainter& painter);
+
+public:
+    void openKinect();
+    void closeKinect();
 };
 
 #endif // KINECTWIDGET_H
