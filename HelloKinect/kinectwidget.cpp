@@ -7,6 +7,7 @@
 #include <QTime>
 #include <QDateTime>
 #include <QPoint>
+#include "kinectfactory.h"
 
 KinectWidget::KinectWidget(QWidget *parent) : QWidget(parent)
 {
@@ -50,6 +51,8 @@ KinectWidget::~KinectWidget()
     }
 
     this->closeKinect();
+
+//    SafeRelease(mpKinect);
 }
 
 void KinectWidget::paintEvent(QPaintEvent *event)
@@ -89,26 +92,42 @@ void KinectWidget::paintTime(QPainter& painter)
             mpDrawTimeRC = new QRect(0, 0, this->width(), this->height());
         }
 
+        static int preTime = 0;
+        int curTime = mpTime->elapsed();
+        int fps = 1000 / (curTime - preTime);
+        QString strFps = QString("FPS:%1").arg(fps);
+
         painter.save();
         painter.setPen(Qt::red);
         painter.setFont(QFont("Arial", 30));
-        QTime currentTime = QTime::currentTime();
-        QString strTime = QString("%1:%2:%3.%4").arg(currentTime.hour()).arg(currentTime.minute())
-                            .arg(currentTime.second()).arg(currentTime.msec());
-        painter.drawText(*mpDrawTimeRC, strTime);
+//        QTime currentTime = QTime::currentTime();
+//        QString strTime = QString("%1:%2:%3.%4").arg(currentTime.hour()).arg(currentTime.minute())
+//                            .arg(currentTime.second()).arg(currentTime.msec());
+//        painter.drawText(*mpDrawTimeRC, strTime);
+        painter.drawText(*mpDrawTimeRC, strFps);
+        preTime = curTime;
         painter.restore();
     }
 }
 
 void KinectWidget::openKinect()
 {
-    pKinectObj = new KinectObj();
-    pKinectThread = new KinectThread();
-    pKinectThread->pKinectObj = pKinectObj;
+//    HRESULT hr = ::GetDefaultKinectSensor(&mpKinect);
 
-    connect(pKinectThread, SIGNAL(update()), this, SLOT(updateUI()));
+//    if (SUCCEEDED(hr))
+//    {
+//        hr = mpKinect->Open();
+//        qDebug() << "open Kinect Success";
 
-    pKinectThread->start();
+//        pKinectObj = new KinectObj(mpKinect);
+        pKinectObj = KinectFactory::Instance()->getColorFrame();
+        pKinectThread = new KinectThread();
+        pKinectThread->pKinectObj = pKinectObj;
+
+        connect(pKinectThread, SIGNAL(update()), this, SLOT(updateUI()));
+
+        pKinectThread->start();
+//    }
 }
 
 void KinectWidget::closeKinect()
@@ -117,18 +136,27 @@ void KinectWidget::closeKinect()
     {
         if (pKinectThread->isRunning())
         {
-            pKinectThread->exit();
+            pKinectThread->stop();
         }
 
         delete pKinectThread;
         pKinectThread = nullptr;
     }
 
-    if (pKinectObj != nullptr)
-    {
-        delete pKinectObj;
-        pKinectObj = nullptr;
-    }
+//    if (pKinectObj != nullptr)
+//    {
+//        delete pKinectObj;
+//        pKinectObj = nullptr;
+//    }
+    pKinectObj = nullptr;
+    KinectFactory::Instance()->closeColorFrame();
+
+//    if (mpKinect != nullptr)
+//    {
+//        mpKinect->Close();
+//        qDebug() << "close Kinect Success";
+//    }
+    KinectFactory::Instance()->closeKinect();
 }
 
 void KinectWidget::updateUI()

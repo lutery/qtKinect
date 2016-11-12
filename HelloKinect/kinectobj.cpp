@@ -1,9 +1,20 @@
+/*********************************************************
+* Copyright: chenghui
+* Author: chenghui
+* Date: 20160925
+* Description:KinectObj实现从Kinect获取彩色帧的功能
+*
+**********************************************************/
 #include <QDebug>
 #include "kinectobj.h"
 
-KinectObj::KinectObj(QObject *parent) : QObject(parent)
+/**
+ * @brief KinectObj::KinectObj 构造函数
+ * @param parent 传入父类，当父类释放的时候，该类也会被释放
+ */
+KinectObj::KinectObj(IKinectSensor* pKinect, QObject *parent) : QObject(parent)
 {
-    mpKinect = nullptr;
+    mpKinect = pKinect;
     mpColorFrameReader = nullptr;
     mhColorFrameArrived = NULL;
     mpColorRGBX = nullptr;
@@ -14,14 +25,19 @@ KinectObj::KinectObj(QObject *parent) : QObject(parent)
     this->initKinect();
 }
 
+/**
+ * @brief KinectObj::~KinectObj 析构函数，释放资源
+ */
 KinectObj::~KinectObj()
 {
+    // 释放帧生成事件
     if (mhColorFrameArrived != NULL && mpColorFrameReader != nullptr)
     {
         mpColorFrameReader->UnsubscribeFrameArrived(mhColorFrameArrived);
         mhColorFrameArrived = 0;
     }
 
+    // 释放彩色帧读取对象
     SafeRelease(mpColorFrameReader);
 
     if (mpKinect != nullptr)
@@ -52,21 +68,31 @@ KinectObj::~KinectObj()
     }
 }
 
+/**
+ * @brief KinectObj::myImageCleanupHandler QImage内存释放函数
+ * @param info 传入相关的信息，这里传入的就是内存地址，只要把这个释放了就可以释放内存
+ */
 void KinectObj::myImageCleanupHandler(void *info)
 {
     delete[] info;
 }
 
+/**
+ * @brief KinectObj::initKinect 初始化Kinect设备
+ * @return 返回S_OK表示初始化成功，返回S_FALSE表示初始化失败
+ */
 HRESULT KinectObj::initKinect()
 {
     IColorFrameSource* pColorFrameSource = nullptr;
-    HRESULT hr = ::GetDefaultKinectSensor(&mpKinect);
+//    HRESULT hr = ::GetDefaultKinectSensor(&mpKinect);
 
-    if (SUCCEEDED(hr))
-    {
-        hr = mpKinect->Open();
-        qDebug() << "open Kinect Success";
-    }
+//    if (SUCCEEDED(hr))
+//    {
+//        hr = mpKinect->Open();
+//        qDebug() << "open Kinect Success";
+//    }
+
+    HRESULT hr = mpKinect != nullptr ? S_OK : S_FALSE;
 
     if (SUCCEEDED(hr))
     {
@@ -96,7 +122,11 @@ HRESULT KinectObj::initKinect()
     return hr;
 }
 
-HRESULT KinectObj::checkColorFrame()
+/**
+ * @brief KinectObj::checkColorFrame 获取每帧，必须要等到帧生成事件响应，否则多次获取空帧将会出现异常
+ * @return  返回S_OK表示初始化成功,返回S_FALSE表示初始化失败
+ */
+HRESULT KinectObj::checkFrame()
 {
     if (mpColorFrameReader == nullptr)
     {
@@ -191,12 +221,17 @@ void KinectObj::addQImage(QImage *image)
     mBufferImage.append(std::shared_ptr<QImage>(image));
     //这里有一个未解之谜，如果仅仅只是绘制在主DIALOG主对话框中得化
     //那么即使这里填写60，也不会有延时
-    if (mBufferImage.count() > 5)
+    if (mBufferImage.count() > MAX_FRAME_COUNT)
     {
         mBufferImage.pop_front();
     }
     qDebug() << "BufferImage Size is " << mBufferImage.size();
     pMutex->unlock();
+}
+
+WAITABLE_HANDLE KinectObj::getWaitableHandle()
+{
+    return this->mhColorFrameArrived;
 }
 
 std::shared_ptr<QImage> KinectObj::getQImage()

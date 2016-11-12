@@ -17,7 +17,9 @@ SOURCES += main.cpp\
         dialog.cpp \
     kinectthread.cpp \
     kinectobj.cpp \
-    kinectwidget.cpp
+    kinectwidget.cpp \
+    kinectdepthobj.cpp \
+    kinectfactory.cpp
 
 HEADERS  += dialog.h \
     stdinc.h \
@@ -33,7 +35,10 @@ HEADERS  += dialog.h \
     NuiKinectFusionVolume.h \
     kinectthread.h \
     kinectobj.h \
-    kinectwidget.h
+    kinectwidget.h \
+    kinectdepthobj.h \
+    kinectframeprotocol.h \
+    kinectfactory.h
 
 
 FORMS    += dialog.ui

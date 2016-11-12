@@ -17,6 +17,7 @@ Dialog::Dialog(QWidget *parent) :
 
 //    this->setFixedWidth(1920);
 //    this->setFixedHeight(1080);
+    //重置窗口的尺寸
     this->resize(1920, 1080);
 
 //    pKinectObj = new KinectObj();
