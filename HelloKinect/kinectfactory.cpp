@@ -13,14 +13,13 @@ KinectFactory::KinectFactory(QObject *parent) : QObject(parent)
 
 KinectFactory::~KinectFactory()
 {
-//    if (mColorObj != nullptr)
-//    {
-//        delete mColorObj;
-//        mColorObj = nullptr;
-//    }
     mColorObj = nullptr;
 }
 
+/**
+ * @brief KinectFactory::Instance 返回Kinect实例对象指针
+ * @return KinectFactory实例对象指针
+ */
 KinectFactory* KinectFactory::Instance()
 {
     if (pSelf == nullptr)
@@ -32,6 +31,10 @@ KinectFactory* KinectFactory::Instance()
     return pSelf;
 }
 
+/**
+ * @brief KinectFactory::initKinect 初始化Kinect设备对象
+ * @return 返回S_FALSE表示初始化失败，返回S_OK表示初始化成功
+ */
 HRESULT KinectFactory::initKinect()
 {
     if (S_FALSE == mhrReady)
@@ -53,6 +56,9 @@ HRESULT KinectFactory::initKinect()
     return mhrReady;
 }
 
+/**
+ * @brief KinectFactory::closeKinect 关闭Kinect对象
+ */
 void KinectFactory::closeKinect()
 {
     if (mpKinect != nullptr)
@@ -65,6 +71,10 @@ void KinectFactory::closeKinect()
     }
 }
 
+/**
+ * @brief KinectFactory::getColorFrame 获取颜色帧
+ * @return 返回颜色帧对象
+ */
 KinectFrameProtocol* KinectFactory::getColorFrame()
 {
     if (SUCCEEDED(this->initKinect()) && mColorObj == nullptr)
@@ -75,12 +85,18 @@ KinectFrameProtocol* KinectFactory::getColorFrame()
     return mColorObj.get();
 }
 
+/**
+ * @brief KinectFactory::closeColorFrame 关闭颜色帧对象
+ */
 void KinectFactory::closeColorFrame()
 {
-//    this->closeFrameObj(&this->);
     this->mColorObj = nullptr;
 }
 
+/**
+ * @brief KinectFactory::closeFrameObj 关闭帧对象通用函数，可以用协议实现，也可以用模板实现
+ * @param pFrameObj 返回帧对象
+ */
 void KinectFactory::closeFrameObj(KinectFrameProtocol** pFrameObj)
 {
     if ((*pFrameObj) != nullptr)

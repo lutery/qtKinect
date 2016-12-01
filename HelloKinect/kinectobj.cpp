@@ -84,13 +84,6 @@ void KinectObj::myImageCleanupHandler(void *info)
 HRESULT KinectObj::initKinect()
 {
     IColorFrameSource* pColorFrameSource = nullptr;
-//    HRESULT hr = ::GetDefaultKinectSensor(&mpKinect);
-
-//    if (SUCCEEDED(hr))
-//    {
-//        hr = mpKinect->Open();
-//        qDebug() << "open Kinect Success";
-//    }
 
     HRESULT hr = mpKinect != nullptr ? S_OK : S_FALSE;
 

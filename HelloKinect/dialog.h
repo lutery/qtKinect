@@ -2,13 +2,8 @@
 #define DIALOG_H
 
 #include <QDialog>
-//#include "Kinect/inc/Kinect.h"
-//#include "Kinect.h"
-//#include <Kinect.h>
 #include "stdinc.h"
 
-//class KinectObj;
-//class KinectThread;
 class KinectWidget;
 class QPushButton;
 
@@ -38,8 +33,6 @@ private slots:
 
 private:
     Ui::Dialog *ui;
-//    KinectObj* pKinectObj = nullptr;
-//    KinectThread* pKinectThread = nullptr;
     //Kinect显示部件
     KinectWidget* pKinectWidget = nullptr;
     //打开按钮
@@ -56,7 +49,6 @@ private:
     void initEvent();
 
 protected:
-//    void paintEvent(QPaintEvent* event) override;
 };
 
 #endif // DIALOG_H

@@ -15,19 +15,9 @@ Dialog::Dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-//    this->setFixedWidth(1920);
-//    this->setFixedHeight(1080);
     //重置窗口的尺寸
     this->resize(1920, 1080);
 
-//    pKinectObj = new KinectObj();
-
-//    pKinectThread = new KinectThread();
-//    pKinectThread->pKinectObj = pKinectObj;
-
-//    connect(pKinectThread, SIGNAL(update()), this, SLOT(updateUI()));
-
-//    pKinectThread->start();
     this->initView();
     this->initEvent();
 }
@@ -35,21 +25,6 @@ Dialog::Dialog(QWidget *parent) :
 Dialog::~Dialog()
 {
     delete ui;
-
-//    if (pKinectThread != nullptr)
-//    {
-//        if (pKinectThread->isRunning())
-//        {
-//            pKinectThread->exit();
-//        }
-
-//        delete pKinectThread;
-//    }
-
-//    if (pKinectObj != nullptr)
-//    {
-//        delete pKinectObj;
-//    }
 }
 
 void Dialog::initView()
@@ -103,20 +78,3 @@ void Dialog::switchTime()
         pShowTimePB->setText(tr("打开时间"));
     }
 }
-
-//void Dialog::updateUI()
-//{
-//    this->update();
-//}
-
-//void Dialog::paintEvent(QPaintEvent *event)
-//{
-//    QDialog::paintEvent(event);
-
-//    QPainter painter(this);
-//    auto pImage = pKinectObj->getQImage();
-//    if (pImage != nullptr)
-//    {
-//        painter.drawImage(0, 0, *pImage);
-//    }
-//}

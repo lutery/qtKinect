@@ -32,8 +32,6 @@ public:
     bool mbShowTime = true;
 
 private:
-    //Kinect颜色帧对象
-//    KinectObj* pKinectObj = nullptr;
     KinectFrameProtocol* pKinectObj = nullptr;
     //Kinect获取帧线程
     KinectThread* pKinectThread = nullptr;
