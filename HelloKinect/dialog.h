@@ -26,6 +26,7 @@ private slots:
 //    void updateUI();
     //打开Kinect对象
     void openKinect();
+    void openDepthFrame();
     //关闭Kinect对象
     void closeKinect();
     //显示事件
@@ -37,6 +38,7 @@ private:
     KinectWidget* pKinectWidget = nullptr;
     //打开按钮
     QPushButton* pOpenPB = nullptr;
+    QPushButton* pOpenDepthPB = nullptr;
     //关闭按钮
     QPushButton* pClosePB = nullptr;
     //显示事件按钮

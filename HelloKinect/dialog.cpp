@@ -35,8 +35,10 @@ void Dialog::initView()
     pOpenPB = new QPushButton(tr("打开Kinect"), this);
     pClosePB = new QPushButton(tr("关闭Kinect"), this);
     pShowTimePB = new QPushButton(tr("关闭时间"), this);
+    pOpenDepthPB = new QPushButton(tr("DepthFrame"), this);
 
     leftBarLayout->addWidget(pOpenPB);
+    leftBarLayout->addWidget(pOpenDepthPB);
     leftBarLayout->addWidget(pShowTimePB);
     leftBarLayout->addWidget(pClosePB);
     leftBarLayout->addStretch(1);
@@ -51,6 +53,7 @@ void Dialog::initView()
 void Dialog::initEvent()
 {
     connect(pOpenPB, SIGNAL(clicked(bool)), this, SLOT(openKinect()));
+    connect(pOpenDepthPB, SIGNAL(clicked(bool)), this, SLOT(openDepthFrame()));
     connect(pClosePB, SIGNAL(clicked(bool)), this, SLOT(closeKinect()));
     connect(pShowTimePB, SIGNAL(clicked(bool)), this, SLOT(switchTime()));
 }
@@ -58,6 +61,11 @@ void Dialog::initEvent()
 void Dialog::openKinect()
 {
     pKinectWidget->openKinect();
+}
+
+void Dialog::openDepthFrame()
+{
+    pKinectWidget->openDepthFrame();
 }
 
 void Dialog::closeKinect()

@@ -96,7 +96,7 @@ void KinectWidget::paintTime(QPainter& painter)
 
         static int preTime = 0;
         int curTime = mpTime->elapsed();
-        int fps = 1000 / (curTime - preTime);
+        int fps = 1000 / ((curTime - preTime) == 0 ? 1 : (curTime - preTime));
         QString strFps = QString("FPS:%1").arg(fps);
 
         painter.save();
@@ -119,6 +119,12 @@ void KinectWidget::openKinect()
 {
     //获取颜色帧对象，并赋值到子线程终
     pKinectObj = KinectFactory::Instance()->getColorFrame();
+    pKinectThread->pKinectObj = pKinectObj;
+}
+
+void KinectWidget::openDepthFrame()
+{
+    pKinectObj = KinectFactory::Instance()->getDepthFrame();
     pKinectThread->pKinectObj = pKinectObj;
 }
 

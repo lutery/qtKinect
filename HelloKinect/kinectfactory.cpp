@@ -1,5 +1,6 @@
 #include "kinectfactory.h"
 #include <kinectobj.h>
+#include <kinectdepthobj.h>
 #include <QDebug>
 
 KinectFactory* KinectFactory::pSelf = nullptr;
@@ -69,6 +70,8 @@ void KinectFactory::closeKinect()
         mhrReady = S_FALSE;
         qDebug() << "close Kinect Success";
     }
+
+    SafeRelease(mpKinect);
 }
 
 /**
@@ -85,12 +88,27 @@ KinectFrameProtocol* KinectFactory::getColorFrame()
     return mColorObj.get();
 }
 
+KinectFrameProtocol* KinectFactory::getDepthFrame()
+{
+    if (SUCCEEDED(this->initKinect()) && mpDepthObj == nullptr)
+    {
+        mpDepthObj = std::shared_ptr<KinectDepthObj>(new KinectDepthObj(mpKinect));
+    }
+
+    return mpDepthObj.get();
+}
+
 /**
  * @brief KinectFactory::closeColorFrame 关闭颜色帧对象
  */
 void KinectFactory::closeColorFrame()
 {
     this->mColorObj = nullptr;
+}
+
+void KinectFactory::closeDepthFrame()
+{
+    this->mpDepthObj = nullptr;
 }
 
 /**

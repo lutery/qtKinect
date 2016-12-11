@@ -49,6 +49,7 @@ protected:
 public:
     //打开Kinect
     void openKinect();
+    void openDepthFrame();
     //关闭Kinect
     void closeKinect();
 };

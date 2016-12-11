@@ -40,13 +40,13 @@ KinectObj::~KinectObj()
     // 释放彩色帧读取对象
     SafeRelease(mpColorFrameReader);
 
-    if (mpKinect != nullptr)
-    {
-        mpKinect->Close();
-        qDebug() << "close Kinect Success";
-    }
+//    if (mpKinect != nullptr)
+//    {
+//        mpKinect->Close();
+//        qDebug() << "close Kinect Success";
+//    }
 
-    SafeRelease(mpKinect);
+//    SafeRelease(mpKinect);
 
     if (mpColorRGBX != nullptr)
     {
