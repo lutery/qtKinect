@@ -19,7 +19,11 @@ SOURCES += main.cpp\
     kinectobj.cpp \
     kinectwidget.cpp \
     kinectdepthobj.cpp \
-    kinectfactory.cpp
+    kinectfactory.cpp \
+    kinectcolorobj.cpp \
+    kinectgrayobj.cpp \
+    kinectbodyindex.cpp \
+    kinectgreenscreeninbl.cpp
 
 HEADERS  += dialog.h \
     stdinc.h \
@@ -38,7 +42,11 @@ HEADERS  += dialog.h \
     kinectwidget.h \
     kinectdepthobj.h \
     kinectframeprotocol.h \
-    kinectfactory.h
+    kinectfactory.h \
+    kinectcolorobj.h \
+    kinectgrayobj.h \
+    kinectbodyindex.h \
+    kinectgreenscreeninbl.h
 
 
 FORMS    += dialog.ui

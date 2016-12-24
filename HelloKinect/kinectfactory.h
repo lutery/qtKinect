@@ -5,8 +5,10 @@
 #include <memory>
 #include "kinectframeprotocol.h"
 
-class KinectObj;
 class KinectDepthObj;
+class KinectColorObj;
+class KinectGrayObj;
+class KinectBodyIndex;
 
 /**
  * @brief The KinectFactory class KinectFactory工厂对象，用于维护Kinect资源
@@ -26,9 +28,12 @@ public:
     //获取颜色帧
     KinectFrameProtocol* getColorFrame();
     KinectFrameProtocol* getDepthFrame();
+    KinectFrameProtocol* getFraredFrame();
+    KinectFrameProtocol *getBodyIndexFrame();
     //释放关闭颜色帧
     void closeColorFrame();
     void closeDepthFrame();
+    void closeFraredFrame();
     //关闭Kinect对象
     void closeKinect();
     //关闭帧对象（通用）
@@ -48,8 +53,10 @@ private:
     //Kinect传感器对象
     IKinectSensor* mpKinect = nullptr;
     //颜色帧对象
-    std::shared_ptr<KinectObj> mColorObj;
+    std::shared_ptr<KinectColorObj> mColorObj;
     std::shared_ptr<KinectDepthObj> mpDepthObj;
+    std::shared_ptr<KinectGrayObj> mpFraredObj;
+    std::shared_ptr<KinectBodyIndex> mpBodyIndexObj;
 };
 
 #endif // KINECTFACTORY_H

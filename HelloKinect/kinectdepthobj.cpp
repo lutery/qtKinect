@@ -13,9 +13,9 @@
  * @param pKinect
  * @param parent
  */
-KinectDepthObj::KinectDepthObj(IKinectSensor* pKinect, QObject *parent) : QObject(parent)
+KinectDepthObj::KinectDepthObj(IKinectSensor* pKinect, QObject *parent) : KinectObj(pKinect, parent)
 {
-    mpKinect = pKinect;
+//    mpKinect = pKinect;
     mpDepthFrameReader = nullptr;
     mhDepthFrameArrived = NULL;
     mpColorRGBX = nullptr;
@@ -39,33 +39,33 @@ KinectDepthObj::~KinectDepthObj()
 
     SafeRelease(mpDepthFrameReader);
 
-    if (mpColorRGBX != nullptr)
-    {
-        delete[] mpColorRGBX;
-    }
+//    if (mpColorRGBX != nullptr)
+//    {
+//        delete[] mpColorRGBX;
+//    }
 
-    if (mBufferImage.count() != 0)
-    {
-        mBufferImage.clear();
-    }
+//    if (mBufferImage.count() != 0)
+//    {
+//        mBufferImage.clear();
+//    }
 
-    if (pMutex != nullptr)
-    {
-        pMutex->lock();
-        pMutex->unlock();
+//    if (pMutex != nullptr)
+//    {
+//        pMutex->lock();
+//        pMutex->unlock();
 
-        delete pMutex;
-        pMutex = nullptr;
-    }
+//        delete pMutex;
+//        pMutex = nullptr;
+//    }
 }
 /**
  * @brief KinectDepthObj::myImageCleanupHandler
  * @param info
  */
-void KinectDepthObj::myImageCleanupHandler(void *info)
-{
-    delete[] info;
-}
+//void KinectDepthObj::myImageCleanupHandler(void *info)
+//{
+//    delete[] info;
+//}
 
 HRESULT KinectDepthObj::initKinect()
 {
@@ -212,33 +212,33 @@ HRESULT KinectDepthObj::checkFrame()
     return hr;
 }
 
-void KinectDepthObj::addQImage(QImage *image)
-{
-    pMutex->lock();
-    mBufferImage.append(std::shared_ptr<QImage>(image));
+//void KinectDepthObj::addQImage(QImage *image)
+//{
+//    pMutex->lock();
+//    mBufferImage.append(std::shared_ptr<QImage>(image));
 
-    if (mBufferImage.count() > MAX_FRAME_COUNT)
-    {
-        mBufferImage.pop_front();
-    }
+//    if (mBufferImage.count() > MAX_FRAME_COUNT)
+//    {
+//        mBufferImage.pop_front();
+//    }
 
-    pMutex->unlock();
-}
+//    pMutex->unlock();
+//}
 
-std::shared_ptr<QImage> KinectDepthObj::getQImage()
-{
-    if (mBufferImage.count() <= 0)
-    {
-        return nullptr;
-    }
+//std::shared_ptr<QImage> KinectDepthObj::getQImage()
+//{
+//    if (mBufferImage.count() <= 0)
+//    {
+//        return nullptr;
+//    }
 
-    pMutex->lock();
-    auto pImage = mBufferImage.first();
-    mBufferImage.pop_front();
-    pMutex->unlock();
+//    pMutex->lock();
+//    auto pImage = mBufferImage.first();
+//    mBufferImage.pop_front();
+//    pMutex->unlock();
 
-    return pImage;
-}
+//    return pImage;
+//}
 
 WAITABLE_HANDLE KinectDepthObj::getWaitableHandle()
 {

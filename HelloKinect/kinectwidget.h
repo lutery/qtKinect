@@ -50,6 +50,8 @@ public:
     //打开Kinect
     void openKinect();
     void openDepthFrame();
+    void openFraredFrame();
+    void openBodyIndexFrame();
     //关闭Kinect
     void closeKinect();
 };

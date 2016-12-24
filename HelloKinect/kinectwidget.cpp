@@ -128,6 +128,18 @@ void KinectWidget::openDepthFrame()
     pKinectThread->pKinectObj = pKinectObj;
 }
 
+void KinectWidget::openFraredFrame()
+{
+    pKinectObj = KinectFactory::Instance()->getFraredFrame();
+    pKinectThread->pKinectObj = pKinectObj;
+}
+
+void KinectWidget::openBodyIndexFrame()
+{
+    pKinectObj = KinectFactory::Instance()->getBodyIndexFrame();
+    pKinectThread->pKinectObj = pKinectObj;
+}
+
 /**
  * @brief KinectWidget::closeKinect 关闭Kinect对象
  */

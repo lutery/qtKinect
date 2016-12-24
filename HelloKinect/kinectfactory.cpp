@@ -1,6 +1,8 @@
 #include "kinectfactory.h"
-#include <kinectobj.h>
+#include <kinectcolorobj.h>
 #include <kinectdepthobj.h>
+#include <kinectgrayobj.h>
+#include <kinectbodyindex.h>
 #include <QDebug>
 
 KinectFactory* KinectFactory::pSelf = nullptr;
@@ -14,7 +16,9 @@ KinectFactory::KinectFactory(QObject *parent) : QObject(parent)
 
 KinectFactory::~KinectFactory()
 {
-    mColorObj = nullptr;
+    closeColorFrame();
+    closeDepthFrame();
+    closeFraredFrame();
 }
 
 /**
@@ -82,7 +86,7 @@ KinectFrameProtocol* KinectFactory::getColorFrame()
 {
     if (SUCCEEDED(this->initKinect()) && mColorObj == nullptr)
     {
-        mColorObj = std::shared_ptr<KinectObj>(new KinectObj(mpKinect));
+        mColorObj = std::shared_ptr<KinectColorObj>(new KinectColorObj(mpKinect));
     }
 
     return mColorObj.get();
@@ -98,6 +102,26 @@ KinectFrameProtocol* KinectFactory::getDepthFrame()
     return mpDepthObj.get();
 }
 
+KinectFrameProtocol *KinectFactory::getFraredFrame()
+{
+    if (SUCCEEDED(this->initKinect()) && this->mpFraredObj == nullptr)
+    {
+        this->mpFraredObj = std::shared_ptr<KinectGrayObj>(new KinectGrayObj(mpKinect));
+    }
+
+    return this->mpFraredObj.get();
+}
+
+KinectFrameProtocol* KinectFactory::getBodyIndexFrame()
+{
+    if (SUCCEEDED(this->initKinect()) && this->mpBodyIndexObj == nullptr)
+    {
+        this->mpBodyIndexObj = std::shared_ptr<KinectBodyIndex>(new KinectBodyIndex(mpKinect));
+    }
+
+    return this->mpBodyIndexObj.get();
+}
+
 /**
  * @brief KinectFactory::closeColorFrame 关闭颜色帧对象
  */
@@ -109,6 +133,11 @@ void KinectFactory::closeColorFrame()
 void KinectFactory::closeDepthFrame()
 {
     this->mpDepthObj = nullptr;
+}
+
+void KinectFactory::closeFraredFrame()
+{
+    this->mpFraredObj = nullptr;
 }
 
 /**
