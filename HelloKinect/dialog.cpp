@@ -38,11 +38,13 @@ void Dialog::initView()
     pOpenDepthPB = new QPushButton(tr("DepthFrame"), this);
     pOpenFraredPB = new QPushButton(tr("FraredFrame"), this);
     pOpenBodyIndexPB = new QPushButton(tr("BodyIndexFrame"), this);
+    pOpenGreenScreenPB = new QPushButton(tr("GreenScreen"), this);
 
     leftBarLayout->addWidget(pOpenPB);
     leftBarLayout->addWidget(pOpenDepthPB);
     leftBarLayout->addWidget(pOpenFraredPB);
     leftBarLayout->addWidget(pOpenBodyIndexPB);
+    leftBarLayout->addWidget(pOpenGreenScreenPB);
     leftBarLayout->addWidget(pShowTimePB);
     leftBarLayout->addWidget(pClosePB);
     leftBarLayout->addStretch(1);
@@ -62,6 +64,7 @@ void Dialog::initEvent()
     connect(pClosePB, SIGNAL(clicked(bool)), this, SLOT(closeKinect()));
     connect(pShowTimePB, SIGNAL(clicked(bool)), this, SLOT(switchTime()));
     connect(pOpenBodyIndexPB, SIGNAL(clicked(bool)), this, SLOT(openBodyIndexFrame()));
+    connect(pOpenGreenScreenPB, SIGNAL(clicked(bool)), this, SLOT(openGreenScreenFrame()));
 }
 
 void Dialog::openKinect()
@@ -82,6 +85,11 @@ void Dialog::openFraredFrame()
 void Dialog::openBodyIndexFrame()
 {
     pKinectWidget->openBodyIndexFrame();
+}
+
+void Dialog::openGreenScreenFrame()
+{
+    pKinectWidget->openGreenScreenFrame();
 }
 
 void Dialog::closeKinect()

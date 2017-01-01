@@ -15,9 +15,13 @@ signals:
 public slots:
 
 private:
+    const int IMAGE_D_WIDTH = 512;
+    const int IMAGE_D_HEIGHT = 424;
+
     ICoordinateMapper* mpCoordinateMapper = nullptr;
     IMultiSourceFrameReader* mpMultiSourceFrameReader = nullptr;
     WAITABLE_HANDLE mhMultiSourceFrameArrived = NULL;
+    WAITABLE_HANDLE mhCoordinateMapperChanged = NULL;
     ColorSpacePoint* mpColorCoordinates = nullptr;
     RGBQUAD* mpColorRGBX;
     unsigned int mBufferSize = 0;

@@ -3,6 +3,7 @@
 #include <kinectdepthobj.h>
 #include <kinectgrayobj.h>
 #include <kinectbodyindex.h>
+#include <kinectgreenscreeninbl.h>
 #include <QDebug>
 
 KinectFactory* KinectFactory::pSelf = nullptr;
@@ -19,6 +20,7 @@ KinectFactory::~KinectFactory()
     closeColorFrame();
     closeDepthFrame();
     closeFraredFrame();
+    this->closeGreenScreenFrame();
 }
 
 /**
@@ -122,6 +124,16 @@ KinectFrameProtocol* KinectFactory::getBodyIndexFrame()
     return this->mpBodyIndexObj.get();
 }
 
+KinectFrameProtocol *KinectFactory::getGreenScreenFrame()
+{
+    if (SUCCEEDED(this->initKinect()) && this->mpGreenScreenObj == nullptr)
+    {
+        this->mpGreenScreenObj = std::shared_ptr<KinectGreenScreenInBl>(new KinectGreenScreenInBl(mpKinect));
+    }
+
+    return this->mpGreenScreenObj.get();
+}
+
 /**
  * @brief KinectFactory::closeColorFrame 关闭颜色帧对象
  */
@@ -138,6 +150,11 @@ void KinectFactory::closeDepthFrame()
 void KinectFactory::closeFraredFrame()
 {
     this->mpFraredObj = nullptr;
+}
+
+void KinectFactory::closeGreenScreenFrame()
+{
+    this->mpGreenScreenObj = nullptr;
 }
 
 /**

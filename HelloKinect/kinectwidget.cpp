@@ -140,6 +140,12 @@ void KinectWidget::openBodyIndexFrame()
     pKinectThread->pKinectObj = pKinectObj;
 }
 
+void KinectWidget::openGreenScreenFrame()
+{
+    pKinectObj = KinectFactory::Instance()->getGreenScreenFrame();
+    pKinectThread->pKinectObj = pKinectObj;
+}
+
 /**
  * @brief KinectWidget::closeKinect 关闭Kinect对象
  */

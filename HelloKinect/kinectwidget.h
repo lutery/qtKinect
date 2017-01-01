@@ -52,6 +52,7 @@ public:
     void openDepthFrame();
     void openFraredFrame();
     void openBodyIndexFrame();
+    void openGreenScreenFrame();
     //关闭Kinect
     void closeKinect();
 };
