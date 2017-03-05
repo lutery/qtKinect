@@ -30,6 +30,7 @@ private:
 public:
     HRESULT checkFrame() override;
     WAITABLE_HANDLE getWaitableHandle() override;
+    bool update() override;
 };
 
 #endif // KINECTBODYINDEX_H

@@ -30,6 +30,8 @@ private slots:
     void openFraredFrame();
     void openBodyIndexFrame();
     void openGreenScreenFrame();
+    void openBoneFrame();
+    void openFunnyManFrame();
     //关闭Kinect对象
     void closeKinect();
     //显示事件
@@ -45,6 +47,8 @@ private:
     QPushButton* pOpenFraredPB = nullptr;
     QPushButton* pOpenBodyIndexPB = nullptr;
     QPushButton* pOpenGreenScreenPB = nullptr;
+    QPushButton* pOpenBonePB = nullptr;
+    QPushButton* pOpenFunnyManPB = nullptr;
     //关闭按钮
     QPushButton* pClosePB = nullptr;
     //显示事件按钮

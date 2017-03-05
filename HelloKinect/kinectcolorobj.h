@@ -32,6 +32,7 @@ public:
     //获取当前帧缓存的RGB缓存
     HRESULT checkFrame() override;
     WAITABLE_HANDLE getWaitableHandle() override;
+    bool update() override;
 };
 
 #endif // KINECTCOLOROBJ_H

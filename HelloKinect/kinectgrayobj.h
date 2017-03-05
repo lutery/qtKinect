@@ -25,6 +25,7 @@ private:
 public slots:
     HRESULT checkFrame() override;
     WAITABLE_HANDLE getWaitableHandle() override;
+    bool update() override;
 };
 
 #endif // KINECTGRAYOBJ_H

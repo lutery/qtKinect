@@ -158,3 +158,8 @@ WAITABLE_HANDLE KinectBodyIndex::getWaitableHandle()
 {
     return this->mhBodyIndexFrameArrived;
 }
+
+bool KinectBodyIndex::update()
+{
+    return false;
+}

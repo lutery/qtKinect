@@ -4,6 +4,8 @@
 #include <kinectgrayobj.h>
 #include <kinectbodyindex.h>
 #include <kinectgreenscreeninbl.h>
+#include <kinectbone.h>
+#include <kinectfunnyman.h>
 #include <QDebug>
 
 KinectFactory* KinectFactory::pSelf = nullptr;
@@ -21,6 +23,7 @@ KinectFactory::~KinectFactory()
     closeDepthFrame();
     closeFraredFrame();
     this->closeGreenScreenFrame();
+    this->closeBoneFrame();
 }
 
 /**
@@ -134,6 +137,26 @@ KinectFrameProtocol *KinectFactory::getGreenScreenFrame()
     return this->mpGreenScreenObj.get();
 }
 
+KinectFrameProtocol *KinectFactory::getBoneFrame()
+{
+    if (SUCCEEDED(this->initKinect()) && this->mpBoneObj == nullptr)
+    {
+        this->mpBoneObj = std::shared_ptr<KinectBone>(new KinectBone(mpKinect));
+    }
+
+    return this->mpBoneObj.get();
+}
+
+KinectFrameProtocol *KinectFactory::getFunnyManFrame()
+{
+    if (SUCCEEDED(this->initKinect()) && this->mpFunnyManObj == nullptr)
+    {
+        this->mpFunnyManObj = std::shared_ptr<KinectFunnyMan>(new KinectFunnyMan(mpKinect));
+    }
+
+    return this->mpFunnyManObj.get();
+}
+
 /**
  * @brief KinectFactory::closeColorFrame 关闭颜色帧对象
  */
@@ -155,6 +178,16 @@ void KinectFactory::closeFraredFrame()
 void KinectFactory::closeGreenScreenFrame()
 {
     this->mpGreenScreenObj = nullptr;
+}
+
+void KinectFactory::closeBoneFrame()
+{
+    this->mpBoneObj = nullptr;
+}
+
+void KinectFactory::closeFunnyManFrame()
+{
+    this->mpFunnyManObj = nullptr;
 }
 
 /**

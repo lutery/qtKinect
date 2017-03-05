@@ -10,6 +10,8 @@ class KinectColorObj;
 class KinectGrayObj;
 class KinectBodyIndex;
 class KinectGreenScreenInBl;
+class KinectBone;
+class KinectFunnyMan;
 
 /**
  * @brief The KinectFactory class KinectFactory工厂对象，用于维护Kinect资源
@@ -32,11 +34,15 @@ public:
     KinectFrameProtocol* getFraredFrame();
     KinectFrameProtocol* getBodyIndexFrame();
     KinectFrameProtocol* getGreenScreenFrame();
+    KinectFrameProtocol* getBoneFrame();
+    KinectFrameProtocol* getFunnyManFrame();
     //释放关闭颜色帧
     void closeColorFrame();
     void closeDepthFrame();
     void closeFraredFrame();
     void closeGreenScreenFrame();
+    void closeBoneFrame();
+    void closeFunnyManFrame();
     //关闭Kinect对象
     void closeKinect();
     //关闭帧对象（通用）
@@ -61,6 +67,8 @@ private:
     std::shared_ptr<KinectGrayObj> mpFraredObj;
     std::shared_ptr<KinectBodyIndex> mpBodyIndexObj;
     std::shared_ptr<KinectGreenScreenInBl> mpGreenScreenObj;
+    std::shared_ptr<KinectBone> mpBoneObj;
+    std::shared_ptr<KinectFunnyMan> mpFunnyManObj;
 };
 
 #endif // KINECTFACTORY_H

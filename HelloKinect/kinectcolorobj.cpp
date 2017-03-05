@@ -223,6 +223,11 @@ WAITABLE_HANDLE KinectColorObj::getWaitableHandle()
     return this->mhColorFrameArrived;
 }
 
+bool KinectColorObj::update()
+{
+    return false;
+}
+
 //std::shared_ptr<QImage> KinectColorObj::getQImage()
 //{
 //    if (mBufferImage.count() <= 0)

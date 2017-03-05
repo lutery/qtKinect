@@ -48,6 +48,7 @@ public:
     //从缓存队列头获取帧缓存的一个缓存帧
     std::shared_ptr<QImage> getQImage() override;
     WAITABLE_HANDLE getWaitableHandle() = 0;
+    bool update() = 0;
 };
 
 #endif // KINECTOBJ_H

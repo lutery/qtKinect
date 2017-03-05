@@ -146,6 +146,18 @@ void KinectWidget::openGreenScreenFrame()
     pKinectThread->pKinectObj = pKinectObj;
 }
 
+void KinectWidget::openBoneFrame()
+{
+    pKinectObj = KinectFactory::Instance()->getBoneFrame();
+    pKinectThread->pKinectObj = pKinectObj;
+}
+
+void KinectWidget::openFunnyManFrame()
+{
+    pKinectObj = KinectFactory::Instance()->getFunnyManFrame();
+    pKinectThread->pKinectObj = pKinectObj;
+}
+
 /**
  * @brief KinectWidget::closeKinect 关闭Kinect对象
  */

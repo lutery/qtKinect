@@ -38,13 +38,17 @@ void Dialog::initView()
     pOpenDepthPB = new QPushButton(tr("DepthFrame"), this);
     pOpenFraredPB = new QPushButton(tr("FraredFrame"), this);
     pOpenBodyIndexPB = new QPushButton(tr("BodyIndexFrame"), this);
+    pOpenFunnyManPB = new QPushButton(tr("FunnyMan"), this);
     pOpenGreenScreenPB = new QPushButton(tr("GreenScreen"), this);
+    pOpenBonePB = new QPushButton(tr("BoneFrame"), this);
 
     leftBarLayout->addWidget(pOpenPB);
     leftBarLayout->addWidget(pOpenDepthPB);
     leftBarLayout->addWidget(pOpenFraredPB);
     leftBarLayout->addWidget(pOpenBodyIndexPB);
     leftBarLayout->addWidget(pOpenGreenScreenPB);
+    leftBarLayout->addWidget(pOpenFunnyManPB);
+    leftBarLayout->addWidget(pOpenBonePB);
     leftBarLayout->addWidget(pShowTimePB);
     leftBarLayout->addWidget(pClosePB);
     leftBarLayout->addStretch(1);
@@ -65,6 +69,8 @@ void Dialog::initEvent()
     connect(pShowTimePB, SIGNAL(clicked(bool)), this, SLOT(switchTime()));
     connect(pOpenBodyIndexPB, SIGNAL(clicked(bool)), this, SLOT(openBodyIndexFrame()));
     connect(pOpenGreenScreenPB, SIGNAL(clicked(bool)), this, SLOT(openGreenScreenFrame()));
+    connect(pOpenBonePB, SIGNAL(clicked(bool)), this, SLOT(openBoneFrame()));
+    connect(pOpenFunnyManPB, SIGNAL(clicked(bool)), this, SLOT(openFunnyManFrame()));
 }
 
 void Dialog::openKinect()
@@ -90,6 +96,16 @@ void Dialog::openBodyIndexFrame()
 void Dialog::openGreenScreenFrame()
 {
     pKinectWidget->openGreenScreenFrame();
+}
+
+void Dialog::openBoneFrame()
+{
+    pKinectWidget->openBoneFrame();
+}
+
+void Dialog::openFunnyManFrame()
+{
+    pKinectWidget->openFunnyManFrame();
 }
 
 void Dialog::closeKinect()

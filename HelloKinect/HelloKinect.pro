@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     kinectcolorobj.cpp \
     kinectgrayobj.cpp \
     kinectbodyindex.cpp \
-    kinectgreenscreeninbl.cpp
+    kinectgreenscreeninbl.cpp \
+    kinectbone.cpp \
+    kinectfunnyman.cpp
 
 HEADERS  += dialog.h \
     stdinc.h \
@@ -46,7 +48,9 @@ HEADERS  += dialog.h \
     kinectcolorobj.h \
     kinectgrayobj.h \
     kinectbodyindex.h \
-    kinectgreenscreeninbl.h
+    kinectgreenscreeninbl.h \
+    kinectbone.h \
+    kinectfunnyman.h
 
 
 FORMS    += dialog.ui
@@ -56,3 +60,6 @@ win32: LIBS += -L$$PWD/Kinect/Lib/ -lUser32
 
 INCLUDEPATH += $$PWD/Kinect/inc
 DEPENDPATH += $$PWD/Kinect/inc
+
+RESOURCES += \
+    kinect.qrc

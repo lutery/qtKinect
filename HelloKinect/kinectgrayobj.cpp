@@ -149,3 +149,8 @@ WAITABLE_HANDLE KinectGrayObj::getWaitableHandle()
 {
     return this->mhFraredFrameArrived;
 }
+
+bool KinectGrayObj::update()
+{
+    return false;
+}

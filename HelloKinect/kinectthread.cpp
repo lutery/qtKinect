@@ -1,5 +1,6 @@
 #include "kinectthread.h"
 #include <QDebug>
+#include <QTime>
 //#include "kinectobj.h"
 
 KinectThread::KinectThread() : QThread()
@@ -28,24 +29,41 @@ void KinectThread::run()
 
     //创建颜色帧到达信号
     HANDLE events[] = {reinterpret_cast<HANDLE>(pKinectObj->getWaitableHandle())};
+    QTime timer;
+    timer.start();
 
     while (!mbExit)
     {
         QMutexLocker locker(&mMutex);
-        events[0] = reinterpret_cast<HANDLE>(pKinectObj->getWaitableHandle());
+        auto waitableHandle = pKinectObj->getWaitableHandle();
 
-        //判断颜色帧是否已经到达
-        switch (MsgWaitForMultipleObjects(1, events, FALSE, INFINITE, QS_ALLINPUT))
+        if (events != NULL && waitableHandle != NULL)
         {
-        case WAIT_OBJECT_0 + 0:
-            //颜色帧已经到达，那么就将到达的颜色帧
-            HRESULT hr = pKinectObj->checkFrame();
-            if (SUCCEEDED(hr))
+            events[0] = reinterpret_cast<HANDLE>(waitableHandle);
+            //判断颜色帧是否已经到达
+            switch (MsgWaitForMultipleObjects(1, events, FALSE, INFINITE, QS_ALLINPUT))
             {
-                //获取颜色帧成功，发出更新信号
-                emit update();
+            case WAIT_OBJECT_0 + 0:
+                //颜色帧已经到达，那么就将到达的颜色帧
+                HRESULT hr = pKinectObj->checkFrame();
+                if (SUCCEEDED(hr))
+                {
+                    //获取颜色帧成功，发出更新信号
+                    emit update();
+                }
+                break;
             }
-            break;
+        }
+        else
+        {
+            pKinectObj->update();
+                int curTime = timer.elapsed();
+                if (curTime > 34)
+                {
+                    qDebug() << "emit update";
+                    emit update();
+                    timer.restart();
+                }
         }
     }
 

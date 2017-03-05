@@ -244,3 +244,8 @@ WAITABLE_HANDLE KinectDepthObj::getWaitableHandle()
 {
     return this->mhDepthFrameArrived;
 }
+
+bool KinectDepthObj::update()
+{
+    return false;
+}

@@ -286,3 +286,8 @@ WAITABLE_HANDLE KinectGreenScreenInBl::getWaitableHandle()
 {
     return this->mhMultiSourceFrameArrived;
 }
+
+bool KinectGreenScreenInBl::update()
+{
+    return false;
+}

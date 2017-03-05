@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/kinect">
+        <file>Kinect/res/funnyman.jpg</file>
+    </qresource>
+</RCC>

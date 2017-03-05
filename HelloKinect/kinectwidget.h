@@ -53,6 +53,8 @@ public:
     void openFraredFrame();
     void openBodyIndexFrame();
     void openGreenScreenFrame();
+    void openBoneFrame();
+    void openFunnyManFrame();
     //关闭Kinect
     void closeKinect();
 };
