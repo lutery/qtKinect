@@ -27,10 +27,14 @@ Dialog::~Dialog()
     delete ui;
 }
 
+/**
+ * @brief Dialog::initView 初始化对话框
+ */
 void Dialog::initView()
 {
     QHBoxLayout* mainLayout = new QHBoxLayout(this);
 
+    // 初始化按键布局
     QVBoxLayout* leftBarLayout = new QVBoxLayout(this);
     pOpenPB = new QPushButton(tr("打开Kinect"), this);
     pClosePB = new QPushButton(tr("关闭Kinect"), this);
@@ -53,6 +57,7 @@ void Dialog::initView()
     leftBarLayout->addWidget(pClosePB);
     leftBarLayout->addStretch(1);
 
+    // 将按键布局与视频摄像视图布局初始化
     pKinectWidget = new KinectWidget(this);
     mainLayout->addLayout(leftBarLayout);
     mainLayout->addWidget(pKinectWidget, 1);
@@ -60,6 +65,9 @@ void Dialog::initView()
     this->setLayout(mainLayout);
 }
 
+/**
+ * @brief Dialog::initEvent 初始化按键事件回调函数
+ */
 void Dialog::initEvent()
 {
     connect(pOpenPB, SIGNAL(clicked(bool)), this, SLOT(openKinect()));

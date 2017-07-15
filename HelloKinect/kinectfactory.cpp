@@ -22,8 +22,8 @@ KinectFactory::~KinectFactory()
     closeColorFrame();
     closeDepthFrame();
     closeFraredFrame();
-    this->closeGreenScreenFrame();
-    this->closeBoneFrame();
+    closeGreenScreenFrame();
+    closeBoneFrame();
 }
 
 /**
