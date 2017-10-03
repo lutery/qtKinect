@@ -5,6 +5,9 @@
 
 class QImage;
 
+/**
+ * @brief The KinectFunnyMan class 人脸跟随
+ */
 class KinectFunnyMan : public KinectObj
 {
     Q_OBJECT
@@ -28,9 +31,9 @@ private:
     unsigned int mBufferSize = 0;
     QImage* mpTempImage = nullptr;
     QImage* mpFunnyMan = nullptr;
-//    WAITABLE_HANDLE mhFrameArrived;
     std::shared_ptr<QPainter> mpRenderTarget;
     bool mbReady = false;
+    FunnyManState mMen[BODY_COUNT];
 
 private:
     HRESULT initKinect();

@@ -1,6 +1,11 @@
 #include "KinectGreenScreenInBl.h"
 #include <QDebug>
 
+/**
+ * @brief KinectGreenScreenInBl::KinectGreenScreenInBl
+ * @param pKinect Kinect传感器对象
+ * @param parent 父对象
+ */
 KinectGreenScreenInBl::KinectGreenScreenInBl(IKinectSensor* pKinect, QObject *parent) : KinectObj(pKinect, parent)
 {
     this->mpMultiSourceFrameReader = nullptr;
@@ -245,9 +250,9 @@ HRESULT KinectGreenScreenInBl::checkFrame()
 
     if (SUCCEEDED(hr))
     {
-        this->mBufferSize = nColorBufferSize;
-        uchar* pData = new uchar[nColorBufferSize];
-        memset(pData, 0, sizeof(uchar) * nColorBufferSize);
+        this->mBufferSize = nDepthFrameWidth * nDepthFrameHeight * 4;
+        uchar* pData = new uchar[this->mBufferSize];
+        memset(pData, 0, sizeof(uchar) * this->mBufferSize);
         int x, y;
         for (UINT i = 0; i < nDepthFrameBufferSize; ++i)
         {
@@ -260,14 +265,14 @@ HRESULT KinectGreenScreenInBl::checkFrame()
             }
             else
             {
-                pData[y * width_color * 4 + x * 4 + 0] = pColorBuffer[y * width_color + x].rgbBlue;
-                pData[y * width_color * 4 + x * 4 + 1] = pColorBuffer[y * width_color + x].rgbGreen;
-                pData[y * width_color * 4 + x * 4 + 2] = pColorBuffer[y * width_color + x].rgbRed;
-                pData[y * width_color * 4 + x * 4 + 3] = pColorBuffer[y * width_color + x].rgbReserved;
+                pData[i * 4 + 0] = pColorBuffer[y * width_color + x].rgbBlue;
+                pData[i * 4 + 1] = pColorBuffer[y * width_color + x].rgbGreen;
+                pData[i * 4 + 2] = pColorBuffer[y * width_color + x].rgbRed;
+                pData[i * 4 + 3] = pColorBuffer[y * width_color + x].rgbReserved;
             }
         }
 
-        QImage* pImage = new QImage(pData, width_color, height_color, QImage::Format_RGBX8888, KinectObj::myImageCleanupHandler, pData);
+        QImage* pImage = new QImage(pData, nDepthFrameWidth, nDepthFrameHeight, QImage::Format_RGBX8888, KinectObj::myImageCleanupHandler, pData);
         this->addQImage(pImage);
     }
 

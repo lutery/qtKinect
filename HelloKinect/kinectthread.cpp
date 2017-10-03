@@ -5,7 +5,7 @@
 
 KinectThread::KinectThread() : QThread()
 {
-    pKinectObj = nullptr;
+    mpKinectObj = nullptr;
     mbExit = false;
 }
 
@@ -15,27 +15,33 @@ void KinectThread::stop()
     mbExit = true;
 }
 
+void KinectThread::setKinectObj(KinectFrameProtocol *pKinectObj)
+{
+    QMutexLocker locker(&mMutex);
+    mpKinectObj = pKinectObj;
+}
+
 void KinectThread::run()
 {
     while (!mbExit)
     {
         QMutexLocker locker(&mMutex);
         //判断KinectObj对象是否已经不为空
-        if (pKinectObj != nullptr)
+        if (mpKinectObj != nullptr)
         {
             break;
         }
     }
 
     //创建颜色帧到达信号
-    HANDLE events[] = {reinterpret_cast<HANDLE>(pKinectObj->getWaitableHandle())};
+    HANDLE events[] = {reinterpret_cast<HANDLE>(mpKinectObj->getWaitableHandle())};
     QTime timer;
     timer.start();
 
     while (!mbExit)
     {
         QMutexLocker locker(&mMutex);
-        auto waitableHandle = pKinectObj->getWaitableHandle();
+        auto waitableHandle = mpKinectObj->getWaitableHandle();
 
         if (events != NULL && waitableHandle != NULL)
         {
@@ -45,23 +51,29 @@ void KinectThread::run()
             {
             case WAIT_OBJECT_0 + 0:
                 //颜色帧已经到达，那么就将到达的颜色帧
-                HRESULT hr = pKinectObj->checkFrame();
+                HRESULT hr = mpKinectObj->checkFrame();
                 if (SUCCEEDED(hr))
                 {
                     //获取颜色帧成功，发出更新信号
+                    qDebug() << "emit update";
                     emit update();
+//                    std::shared_ptr<QImage> curImage = mpKinectObj->getQImage();
+//                    emit update(curImage);
                 }
                 break;
             }
         }
         else
         {
-            pKinectObj->update();
+            mpKinectObj->update();
                 int curTime = timer.elapsed();
                 if (curTime > 34)
                 {
                     qDebug() << "emit update";
                     emit update();
+//                    std::shared_ptr<QImage> curImage = mpKinectObj->getQImage();
+//                    emit update(curImage);
+
                     timer.restart();
                 }
         }

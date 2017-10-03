@@ -105,6 +105,7 @@ void KinectBone::DrawBoneImage()
         this->DrawHand(this->mBodyInfo[i].rightHandState, this->mBodyInfo[i].jointPoints[JointType_HandRight]);
     }
 
+    this->mpRenderTarget->end();
     this->addQImage(image);
 }
 

@@ -2,4 +2,14 @@
     <qresource prefix="/kinect">
         <file>Kinect/res/funnyman.jpg</file>
     </qresource>
+    <qresource prefix="/">
+        <file>main.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>Image/Zero0.jpg</file>
+        <file>Image/Zero1.jpg</file>
+        <file>Image/Zero2.jpg</file>
+        <file>Image/Zero3.jpg</file>
+        <file>Image/Zero4.jpg</file>
+    </qresource>
 </RCC>

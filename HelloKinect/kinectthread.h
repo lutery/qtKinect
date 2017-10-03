@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QThread>
 #include <QMutex>
+#include <QOpenGLTexture>
+#include <memory>
+#include <QImage>
 #include "kinectframeprotocol.h"
 
 //class KinectObj;
@@ -19,17 +22,19 @@ class KinectThread : public QThread
 public:
     explicit KinectThread();
     void stop();
+    void setKinectObj(KinectFrameProtocol* pKinectObj);
 
 signals:
     //更新信号
     void update();
+    void update(std::shared_ptr<QImage>);
 
 public slots:
 
 public:
     //Kinect对象
 //    KinectObj* pKinectObj;
-    KinectFrameProtocol* pKinectObj;
+    KinectFrameProtocol* mpKinectObj;
     QMutex mMutex;
     bool mbExit;
 };

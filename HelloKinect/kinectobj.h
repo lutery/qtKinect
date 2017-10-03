@@ -26,7 +26,7 @@ public slots:
 protected:
     const int IMAGE_WIDTH = 1920;
     const int IMAGE_HEIGHT = 1080;
-    int MAX_FRAME_COUNT = 1;
+    int MAX_FRAME_COUNT = 60;
     //Kinect传感器
     IKinectSensor* mpKinect;
     //颜色帧每帧缓存

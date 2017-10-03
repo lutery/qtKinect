@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui qml quick
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,7 +25,11 @@ SOURCES += main.cpp\
     kinectbodyindex.cpp \
     kinectgreenscreeninbl.cpp \
     kinectbone.cpp \
-    kinectfunnyman.cpp
+    kinectfunnyman.cpp \
+    kinectitem.cpp \
+    kinectrender.cpp \
+    squircle.cpp \
+    squirclerenderer.cpp
 
 HEADERS  += dialog.h \
     stdinc.h \
@@ -50,7 +54,11 @@ HEADERS  += dialog.h \
     kinectbodyindex.h \
     kinectgreenscreeninbl.h \
     kinectbone.h \
-    kinectfunnyman.h
+    kinectfunnyman.h \
+    kinectitem.h \
+    kinectrender.h \
+    squircle.h \
+    squirclerenderer.h
 
 
 FORMS    += dialog.ui

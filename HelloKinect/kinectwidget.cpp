@@ -119,43 +119,43 @@ void KinectWidget::openKinect()
 {
     //获取颜色帧对象，并赋值到子线程终
     pKinectObj = KinectFactory::Instance()->getColorFrame();
-    pKinectThread->pKinectObj = pKinectObj;
+    pKinectThread->mpKinectObj = pKinectObj;
 }
 
 void KinectWidget::openDepthFrame()
 {
     pKinectObj = KinectFactory::Instance()->getDepthFrame();
-    pKinectThread->pKinectObj = pKinectObj;
+    pKinectThread->mpKinectObj = pKinectObj;
 }
 
 void KinectWidget::openFraredFrame()
 {
     pKinectObj = KinectFactory::Instance()->getFraredFrame();
-    pKinectThread->pKinectObj = pKinectObj;
+    pKinectThread->mpKinectObj = pKinectObj;
 }
 
 void KinectWidget::openBodyIndexFrame()
 {
     pKinectObj = KinectFactory::Instance()->getBodyIndexFrame();
-    pKinectThread->pKinectObj = pKinectObj;
+    pKinectThread->mpKinectObj = pKinectObj;
 }
 
 void KinectWidget::openGreenScreenFrame()
 {
     pKinectObj = KinectFactory::Instance()->getGreenScreenFrame();
-    pKinectThread->pKinectObj = pKinectObj;
+    pKinectThread->mpKinectObj = pKinectObj;
 }
 
 void KinectWidget::openBoneFrame()
 {
     pKinectObj = KinectFactory::Instance()->getBoneFrame();
-    pKinectThread->pKinectObj = pKinectObj;
+    pKinectThread->mpKinectObj = pKinectObj;
 }
 
 void KinectWidget::openFunnyManFrame()
 {
     pKinectObj = KinectFactory::Instance()->getFunnyManFrame();
-    pKinectThread->pKinectObj = pKinectObj;
+    pKinectThread->mpKinectObj = pKinectObj;
 }
 
 /**
